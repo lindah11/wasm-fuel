@@ -1,0 +1,27 @@
+[package]
+name = "wasm-fuel"
+version = "0.3.0"
+edition = "2021"
+rust-version = "1.82"
+license = "MIT"
+description = "Zero-dependency WebAssembly binary parser and fuel-metered stack interpreter"
+authors = ["lindah11"]
+repository = "https://github.com/lindah11/wasm-fuel"
+readme = "README.md"
+keywords = ["wasm", "webassembly", "interpreter", "sandbox", "metering"]
+categories = ["wasm", "parser-implementations", "no-std"]
+
+# The library name is fixed so that `use wasm_fuel::...` keeps working no matter
+# what the package or repository is called.
+[lib]
+name = "wasm_fuel"
+path = "src/lib.rs"
+
+# No third-party crates: the LEB128 decoder, the binary format parser and the
+# interpreter are all in this repository. `cargo build` works offline and the
+# whole trusted computing base is what you see in src/.
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
